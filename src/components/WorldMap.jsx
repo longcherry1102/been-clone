@@ -9,29 +9,6 @@ import {
 // World map topology URL
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
 
-// Country code mapping for react-simple-maps
-const countryCodeMap = {
-  840: 'US', // United States
-  124: 'CA', // Canada
-  484: 'MX', // Mexico
-  76: 'BR',  // Brazil
-  32: 'AR',  // Argentina
-  826: 'GB', // United Kingdom
-  250: 'FR', // France
-  276: 'DE', // Germany
-  380: 'IT', // Italy
-  724: 'ES', // Spain
-  392: 'JP', // Japan
-  156: 'CN', // China
-  356: 'IN', // India
-  764: 'TH', // Thailand
-  36: 'AU',  // Australia
-  554: 'NZ', // New Zealand
-  710: 'ZA', // South Africa
-  818: 'EG', // Egypt
-  404: 'KE', // Kenya
-  504: 'MA', // Morocco
-}
 
 const WorldMap = ({ visitedCountries, onCountryClick, hoveredCountry, setHoveredCountry }) => {
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 })
@@ -62,7 +39,7 @@ const WorldMap = ({ visitedCountries, onCountryClick, hoveredCountry, setHovered
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                const countryCode = countryCodeMap[geo.id]
+                const countryCode = geo.properties.ISO_A2
                 const isVisited = countryCode && visitedCountries.has(countryCode)
                 const isHovered = hoveredCountry === countryCode
                 
